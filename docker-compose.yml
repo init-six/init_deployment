@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  init-api-server:
+    image: evanfordocker/init-api-server:latest
+    restart: always
+    container_name: init-api-server
+    ports:
+      - "9096:9096"
+    environment:
+      - ENV=dev
+      - TRIGGER=1
+
+  init-web-server:
+    image: evanfordocker/init-web-server:latest
+    restart: always
+
+  nginx:
+    image: evanfordocker/init-nginx:latest
+    restart: always
+    ports:
+      - "443:443"
+      - "80:80"
+    logging:
+      driver: json-file
